@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clube dos Ventos Kite Fest</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== EDITE AQUI ===== */
+    :root {
+      --banner-h: 96px;          /* altura do banner no desktop */
+      --banner-h-mobile: 118px;  /* altura do banner no celular  */
+      --corte-rodape: 64px;      /* faixa cortada no fim do iframe */
+
+      --marinho: #062F3F;
+      --marinho-claro: #0B4356;
+      --cyan: #2ED9C3;
+      --areia: #F4F1E8;
+      --laranja: #FF6B35;
+    }
+    /* ====================== */
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #fff;
+      font-family: 'Barlow', system-ui, sans-serif;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+    }
+
+    /* ---------- BANNER ---------- */
+    .banner {
+      flex: 0 0 var(--banner-h);
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(100deg, var(--marinho) 0%, var(--marinho-claro) 100%);
+      color: var(--areia);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 28px;
+    }
+
+    /* linhas de kite ao fundo */
+    .banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        62deg,
+        rgba(46, 217, 195, 0.16) 0 1px,
+        transparent 1px 26px
+      );
+      pointer-events: none;
+    }
+
+    .banner > * { position: relative; z-index: 1; }
+
+    .logo {
+      height: 52px;
+      width: auto;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .titulo {
+      font-family: 'Anton', 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .titulo .destaque { color: var(--cyan); }
+
+    .subtitulo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 232, 0.72);
+      margin-top: 6px;
+    }
+
+    .selo {
+      margin-left: auto;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(46, 217, 195, 0.5);
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      white-space: nowrap;
+    }
+
+    .selo .ponto {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--laranja);
+      animation: pulsar 2s ease-in-out infinite;
+    }
+
+    @keyframes pulsar {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.25; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .selo .ponto { animation: none; }
+    }
+
+    /* ---------- IFRAME ---------- */
+    .iframe-wrapper {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100% + var(--corte-rodape));
+      border: none;
+      display: block;
+    }
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 640px) {
+      .banner {
+        flex-basis: var(--banner-h-mobile);
+        flex-wrap: wrap;
+        align-content: center;
+        gap: 12px;
+        padding: 12px 18px;
+      }
+      .logo { height: 38px; }
+      .selo {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        padding: 5px 12px;
+        font-size: 0.75rem;
+      }
+      .subtitulo { font-size: 0.8rem; letter-spacing: 0.1em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header class="banner">
+      <!-- Troque o src pelo arquivo da logo. Se não tiver, apague a linha abaixo. -->
+      <img class="logo" src="logo.png" alt="Clube dos Ventos" onerror="this.remove()">
+
+      <div>
+        <h1 class="titulo">Clube dos Ventos <span class="destaque">Kite Fest</span></h1>
+        <p class="subtitulo">Ahau Beach &middot; 29 e 30 de setembro</p>
+      </div>
+
+      <span class="selo"><span class="ponto"></span> Resultados ao vivo</span>
+    </header>
+
+    <div class="iframe-wrapper">
+      <iframe
+        id="liveheats-frame"
+        src="https://liveheats.com.br/events/553952"
+        scrolling="yes"
+        allowfullscreen
+        title="Clube dos Ventos Kite Fest"
+      ></iframe>
+    </div>
+
+  </div>
+
+  <script>
+    const frame = document.getElementById('liveheats-frame');
+
+    function hideButtons(doc) {
+      try {
+        const keywords = [
+          'login', 'log in', 'entrar',
+          'sign up', 'signup', 'cadastrar', 'criar conta', 'register',
+          'for organisers', 'for organizers', 'organizadores', 'organiser', 'organizer'
+        ];
+
+        const elements = doc.querySelectorAll('a, button');
+        elements.forEach(el => {
+          const text = el.innerText?.toLowerCase().trim() || '';
+          if (keywords.some(kw => text.includes(kw))) {
+            el.style.setProperty('display', 'none', 'important');
+          }
+        });
+      } catch(e) {}
+    }
+
+    function injectStyles(doc) {
+      try {
+        const existing = doc.getElementById('__hidden_styles__');
+        if (existing) existing.remove();
+
+        const style = doc.createElement('style');
+        style.id = '__hidden_styles__';
+        style.textContent = `
+          a[href*="/login"],
+          a[href*="/signup"],
+          a[href*="/register"],
+          a[href*="sign-in"],
+          a[href*="sign-up"],
+          a[href*="/organiser"],
+          a[href*="/organizer"],
+          a[href*="/dashboard"],
+          a[href*="for-organisers"],
+          a[href*="for-organizers"],
+          nav a[href*="login"],
+          nav a[href*="signup"],
+          nav a[href*="sign-up"],
+          nav a[href*="organis"],
+          nav a[href*="organiz"] {
+            display: none !important;
+          }
+        `;
+        doc.head.appendChild(style);
+
+        hideButtons(doc);
+
+        // Reaplica quando o React re-renderizar elementos
+        const observer = new MutationObserver(() => hideButtons(doc));
+        observer.observe(doc.body, { childList: true, subtree: true });
+
+      } catch (e) {
+        console.warn('Cross-origin bloqueou acesso ao iframe:', e.message);
+      }
+    }
+
+    frame.addEventListener('load', () => {
+      try {
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        injectStyles(doc);
+      } catch (e) {
+        console.warn('Cross-origin bloqueou acesso ao iframe:', e.message);
+      }
+    });
+  </script>
+</body>
+</html>
